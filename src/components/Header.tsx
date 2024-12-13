@@ -11,9 +11,11 @@ import Logo from '@/components/Logo';
 import MobileMenu from '@/components/MobileMenu';
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
@@ -26,6 +28,7 @@ import { Menu } from 'lucide-react';
  * Constants
  */
 import { navMenu } from '@/constants';
+import ThemeToggleButton from './ThemeToggleButton';
 
 function Header() {
   return (
@@ -37,16 +40,46 @@ function Header() {
           <NavigationMenuList>
             {navMenu.map(({ href, label, submenu }, index) => (
               <NavigationMenuItem key={index}>
-                <NavigationMenuLink
-                  href={href}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  {label}
-                </NavigationMenuLink>
+                {submenu ? (
+                  <>
+                    <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className='grid grid-cols-2 w-[640px] p-2 gap-2'>
+                        {submenu.map(({ href, label, icon, desc }, index) => (
+                          <li key={index}>
+                            <NavigationMenuLink asChild>
+                              <a
+                                href={href}
+                                className='flex gap-3 select-none p-2 rounded-sm transition-colors hover:bg-foreground/5'
+                              >
+                                <div className='w-10 h-10 bg-foreground/10 rounded-sm shadow-sm border-t border-background/5 dark:border-foreground/5 flex-shrink-0 grid place-items-center'>
+                                  {icon}
+                                </div>
+                                <div className=''>
+                                  <div className=''>{label}</div>
+                                  <p>{desc}</p>
+                                </div>
+                              </a>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </>
+                ) : (
+                  <NavigationMenuLink
+                    href={href}
+                    className={navigationMenuTriggerStyle()}
+                  >
+                    {label}
+                  </NavigationMenuLink>
+                )}
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
         </NavigationMenu>
+
+        <ThemeToggleButton />
 
         <Popover>
           <PopoverTrigger asChild>
