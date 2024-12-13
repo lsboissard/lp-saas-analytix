@@ -11,14 +11,10 @@ import Logo from '@/components/Logo';
 import MobileMenu from '@/components/MobileMenu';
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-  NavigationMenuViewport,
 } from '@/components/ui/navigation-menu';
 
 /**
