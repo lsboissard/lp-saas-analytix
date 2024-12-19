@@ -33,7 +33,7 @@ import ThemeToggleButton from './ThemeToggleButton';
 function Header() {
   return (
     <header className='h-16 grid grid-cols-1 items-center md:h-20 lg:h-24'>
-      <div className='container flex justify-between'>
+      <div className='container flex justify-between lg:grid lg:grid-cols-[1fr,3fr,1fr]'>
         <Logo variant='icon' />
 
         <NavigationMenu className='max-lg:hidden mx-auto'>
@@ -52,12 +52,16 @@ function Header() {
                                 href={href}
                                 className='flex gap-3 select-none p-2 rounded-sm transition-colors hover:bg-foreground/5'
                               >
-                                <div className='w-10 h-10 bg-foreground/10 rounded-sm shadow-sm border-t border-background/5 dark:border-foreground/5 flex-shrink-0 grid place-items-center'>
+                                <div className='w-10 h-10 text-foreground/50 bg-foreground/10 rounded-sm dark:shadow-sm border-t border-background/5 dark:border-foreground/5 flex-shrink-0 grid place-items-center'>
                                   {icon}
                                 </div>
                                 <div className=''>
-                                  <div className=''>{label}</div>
-                                  <p>{desc}</p>
+                                  <div className='text-sm leading-normal mb-1 font-semibold'>
+                                    {label}
+                                  </div>
+                                  <p className='text-sm leading-normal text-muted-foreground'>
+                                    {desc}
+                                  </p>
                                 </div>
                               </a>
                             </NavigationMenuLink>
@@ -79,7 +83,11 @@ function Header() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <ThemeToggleButton />
+        <div className='flex items-center gap-2 justify-end max-lg:hidden'>
+          <Button variant='ghost'>Sign In</Button>
+          <Button>Free Trial</Button>
+          <ThemeToggleButton />
+        </div>
 
         <Popover>
           <PopoverTrigger asChild>
