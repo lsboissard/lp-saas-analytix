@@ -19,8 +19,7 @@ function ThemeToggleButton() {
     if (savedTheme) {
       return savedTheme === 'dark';
     }
-    // Caso não haja cookie, defina um padrão. Aqui supomos tema claro.
-    return false;
+    return true;
   });
 
   useEffect(() => {
